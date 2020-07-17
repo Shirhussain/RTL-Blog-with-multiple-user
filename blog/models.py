@@ -15,7 +15,7 @@ class Article(models.Model):
     slug = models.SlugField(max_length=100, allow_unicode=True, unique=True) 
     description = models.TextField()
     thumbnail = models.ImageField(upload_to="thumbnials")
-    pubhlish = models.DateTimeField(default=timezone.now)
+    publish = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     status  = models.CharField(max_length=1, choices=STATUS_CHOIICES)

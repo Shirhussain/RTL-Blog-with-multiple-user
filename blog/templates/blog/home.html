@@ -1,1 +1,4 @@
-welocme
+home is here
+{% for article in articles %}
+    <a href="{{ article.get_absolute_url }}">{{article.title}}</a>
+{% endfor %}

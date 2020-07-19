@@ -3,14 +3,16 @@ from . models import Article
 
 
 def home(request):
-    articles = Article.objects.all()
+    articles = Article.objects.filter(status='p').order_by('-publish')
     context = {
         "articles": articles
     }
-    for article in articles:
-        print(article.title)
     return render(request, "blog/home.html",context)
 
 
 def detail(request, slug):
-    return render(request, "blog/detail.html", {})
+    article = Article.objects.get(slug=slug)
+    context = {
+        "article": article
+    }
+    return render(request, "blog/detail.html", context)

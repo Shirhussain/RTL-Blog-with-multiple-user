@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% include 'blog/head.html' %}
+
+<body>
+
+    <!-- Navigation -->
+    {% include 'blog/navbar.html' %}
+
+    <!-- Main Content -->
+    {% block content %}
+    {% endblock content %}
+
+    <!-- Footer -->
+    {% include 'blog/footer.html' %}
+
+    <!-- Bootstrap core JavaScript -->
+    {% include 'blog/scripts.html' %}
+
+</body>
+
+</html>

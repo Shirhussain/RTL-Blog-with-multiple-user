@@ -35,5 +35,7 @@ class Article(models.Model):
 
     def jpublish(self):
         return jalali_converter(self.publish)
+    jpublish.short_description = "زمان انتشار"
+    
 
     

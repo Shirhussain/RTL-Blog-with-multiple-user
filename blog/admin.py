@@ -4,7 +4,7 @@ from .models import Article
 
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ('title', "publish", "status",)
+    list_display = ('title', "jpublish", "status",)
     list_filter = ('publish', 'status')
     search_fields = ('title','description')
     prepopulated_fields = {'slug': ('title',)}

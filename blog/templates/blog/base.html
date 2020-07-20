@@ -1,8 +1,31 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
+<head>
 
-{% include 'blog/head.html' %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
+    <title>
+        {% block title %} شیرحسین    
+        {% endblock title %}
+    </title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'blog/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="{% static 'blog/vendor/fontawesome-free/css/all.min.css" rel="stylesheet' %}" type="text/css">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'blog/css/clean-blog.min.css' %}" rel="stylesheet">
+
+    {% comment %} if i want to add my own CSS style in some pages so i can use like the following {% endcomment %}
+    {% block custome_css %}
+    {% endblock custome_css %}
+</head>
 <body>
 
     <!-- Navigation -->

@@ -22,6 +22,12 @@
     <!-- Custom styles for this template -->
     <link href="{% static 'blog/css/clean-blog.min.css' %}" rel="stylesheet">
 
+    {% comment %} Sahel CDN {% endcomment %}
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/sahel-font@v3.4.0/dist/font-face.css">
+
+    {% comment %} my own style for rtl {% endcomment %}
+    <link href="{% static 'blog/css/rtl.css' %}" rel="stylesheet">
+    
     {% comment %} if i want to add my own CSS style in some pages so i can use like the following {% endcomment %}
     {% block custome_css %}
     {% endblock custome_css %}

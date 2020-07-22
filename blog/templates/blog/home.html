@@ -34,11 +34,14 @@
           <a href="#">شیرحسین</a>
           {{article.jpublish}} </p>
       </div>
+      {% for cat in article.category.all %}
+        <a href="#">#{{cat.title}}</a>
+      {% endfor %}
       <hr>
       {% endfor %}
       <!-- Pager -->
-      <div class="clearfix">
-        <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+      <div class="clearfix paginator-button">
+        <a class="btn btn-primary float-right" href="#"> پست ها قدیمی &larr;</a>
       </div>
     </div>
   </div>

@@ -1,11 +1,13 @@
 from django.shortcuts import render, get_object_or_404
-from . models import Article
+from .models import Article, Category
 
 
 def home(request):
-    articles = Article.objects.filter(status='p').order_by('-publish')
+    articles = Article.objects.filter(status='p')
+    category = Category.objects.filter(status=True)
     context = {
-        "articles": articles
+        "articles": articles,
+        "category": category
     }
     return render(request, "blog/home.html",context)
 

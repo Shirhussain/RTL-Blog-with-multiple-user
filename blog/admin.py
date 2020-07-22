@@ -23,5 +23,9 @@ class ArticleAdmin(admin.ModelAdmin):
     ordering = ['status','-publish']
 
     def category_to_str(self, obj):
-        return "Categories"
+        #in python we someting like the this 
+        #  num = [2,4,6,0,4,20]
+        # [i for i in num]
+        return "،".join([category.title for category in obj.category.all()])
+    category_to_str.short_description = "دسته بندی"
 # admin.site.register(Article, ArticleAdmin)

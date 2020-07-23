@@ -1,0 +1,41 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+
+            <div class="alert alert-primary mt-5 text-center" role="alert">
+                دسته بندی: {{category.title}}
+            </div>
+        {% comment %} here i wanna use "Managers" instead of "all" --> like published  {% endcomment %}
+        {% for article in category.articles.published %}
+        <div class="post-preview">
+            <a href="{{article.get_absolute_url}}">
+            <h2 class="post-title">
+                {{article.title}}
+            </h2>
+            <h3 class="post-subtitle">
+                {{article.description|truncatewords:30}}
+            </h3>
+            </a>
+            <p class="post-meta">پست شده توسط
+            <a href="#">شیرحسین</a>
+            {{article.jpublish}} </p>
+        </div>
+        {% for cat in article.category_published.all %}
+            <a href="{% url 'blog:category' cat.slug %}">#{{cat.title}}</a>
+        {% endfor %}
+        <hr>
+        {% endfor %}
+        <!-- Pager -->
+        <div class="clearfix paginator-button">
+            <a class="btn btn-primary float-right" href="#"> پست ها قدیمی &larr;</a>
+        </div>
+        </div>
+    </div>
+    </div>
+
+<hr>
+{% endblock content %}

@@ -1,10 +1,15 @@
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, get_object_or_404
+
 from .models import Article, Category
 
-
-def home(request):
+#for pageination i will put page=1 by default
+def home(request, page=1):
     # using "Manager"--> published instead of filter(status='p')
-    articles = Article.objects.published()
+    articles_list = Article.objects.published()
+    paginator = Paginator(articles_list, 8)
+    articles = paginator.get_page(page)
+
     context = {
         "articles": articles,
     }
@@ -21,9 +26,15 @@ def detail(request, slug):
     return render(request, "blog/detail.html", context)
 
 
-def category(request, slug):
+def category(request, slug, page=1):
+    category = get_object_or_404(Category, slug=slug, status=True)
+    articles_list = category.articles.published()
+    paginator = Paginator(articles_list, 8)
+    articles = paginator.get_page(page)
+
     context = {
-        "category":get_object_or_404(Category, slug=slug,status=True)
+        "category": category,
+        "articles": articles
     }
     return render(request, "blog/category.html", context)
     

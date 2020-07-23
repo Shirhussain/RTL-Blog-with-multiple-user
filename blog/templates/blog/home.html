@@ -26,7 +26,7 @@
           <h2 class="post-title">
             {{article.title}}
           </h2>
-          <h3 class="post-subtitle">
+          <h3 class="post-subtitle text-justify">
             {{article.description|truncatewords:30}}
           </h3>
         </a>
@@ -41,7 +41,12 @@
       {% endfor %}
       <!-- Pager -->
       <div class="clearfix paginator-button">
-        <a class="btn btn-primary float-right" href="#"> پست ها قدیمی &larr;</a>
+        {% if articles.has_previous %}
+          <a class="btn btn-primary float-right ml-5" href="{% url 'blog:home' articles.previous_page_number %}">&rarr; پست های جدید </a>
+        {% endif %}
+        {% if articles.has_next %}
+        <a class="btn btn-primary float-right" href="{% url 'blog:home' articles.next_page_number %}"> پست ها قدیمی &larr;</a>
+        {% endif %}
       </div>
     </div>
   </div>

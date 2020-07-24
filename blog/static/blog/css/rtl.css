@@ -53,3 +53,68 @@ header.masthead .post-heading h1 {
 .h3, h3 {
     font-size: 1.2rem !important
 }
+
+
+.nav ul {
+    padding-right: 0;
+}
+
+.nav ul li {
+    border-bottom: none;
+    height: 86px;
+    line-height: 86px;
+    font-size: 14px;
+    display: inline-block;
+    float: left;
+    margin: 0 auto;
+}
+
+.nav ul li a {
+    text-decoration: none;
+    color: #000000;
+    display: block;
+    transition: .3s background-color;
+    padding: 0 24px;
+    /* background-color: rgb(14, 0, 66); */
+}
+
+.nav ul li a:hover {
+    background-color: lightseagreen;
+    color:#ffffff;
+}
+
+.nav a {
+    border-bottom: none;
+}
+
+.nav li ul {
+    position: absolute;
+    display: none;
+    width: inherit;
+}
+
+.nav li:hover ul {
+    display: block;
+}
+
+.nav ul li ul li {
+    display: block;
+    float: none !important;
+    height: auto;
+    line-height: 34px;
+}
+
+.nav ul li ul li ul {
+    position: absolute;
+    right: 100%;
+    top: 0;
+    display: none !important;
+}
+
+.nav ul > li > ul > li:hover > ul {
+    display: block !important;
+}
+
+.nav ul > li > ul > li > ul > li:hover > ul {
+    display: block !important;
+}

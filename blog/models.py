@@ -13,6 +13,9 @@ class ArticleManager(models.Manager):
     def published(self):
         return self.filter(status='p')
 
+class CategoryManager(models.Manager):
+    def active(self):
+        return self.filter(status=True)
 
 class Category(models.Model):
     # wanna add subcategory as well 
@@ -30,7 +33,8 @@ class Category(models.Model):
 
     def __str__(self):
         return self.title
-
+        
+    objects = CategoryManager()
 
 class Article(models.Model):
     STATUS_CHOIICES = (

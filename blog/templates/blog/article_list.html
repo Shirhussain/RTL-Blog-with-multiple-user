@@ -20,7 +20,7 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-8 col-md-10 mx-auto">
-      {% for article in articles %}
+      {% for article in object_list %}
       <div class="post-preview">
         <a href="{{article.get_absolute_url}}">
           <h2 class="post-title">
@@ -40,14 +40,16 @@
       <hr>
       {% endfor %}
       <!-- Pager -->
-      <div class="clearfix paginator-button">
-        {% if articles.has_previous %}
-          <a class="btn btn-primary float-right ml-5" href="{% url 'blog:home' articles.previous_page_number %}">&rarr; پست های جدید </a>
-        {% endif %}
-        {% if articles.has_next %}
-        <a class="btn btn-primary float-right" href="{% url 'blog:home' articles.next_page_number %}"> پست ها قدیمی &larr;</a>
-        {% endif %}
-      </div>
+      {% if is_paginated %}
+        <div class="clearfix paginator-button">
+          {% if page_obj.has_previous %}
+            <a class="btn btn-primary float-right ml-5" href="{% url 'blog:home' page_obj.previous_page_number %}">&rarr; پست های جدید </a>
+          {% endif %}
+          {% if page_obj.has_next %}
+          <a class="btn btn-primary float-right" href="{% url 'blog:home' page_obj.next_page_number %}"> پست ها قدیمی &larr;</a>
+          {% endif %}
+        </div>
+      {% endif %}
     </div>
   </div>
 </div>

@@ -1,19 +1,19 @@
 {% extends 'blog/base.html' %}
-  {% block title %} {{article.title}}
+  {% block title %} {{object.title}}
   {% endblock title %}
 {% block content %}
   <!-- Page Header -->
-  <header class="masthead" style="background-image: url({{article.thumbnail.url}})">
+  <header class="masthead" style="background-image: url({{object.thumbnail.url}})">
     <div class="overlay"></div>
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="post-heading">
-            <h1>{{article.title}}</h1>
+            <h1>{{object.title}}</h1>
             {% comment %} <h2 class="subheading">Problems look mighty small from 150 miles up</h2> {% endcomment %}
             <span class="meta">منتشر شده توسط
               <a href="#">شیرحسین</a>
-              {{article.publish|timesince}} قبل </span>
+              {{object.publish|timesince}} قبل </span>
           </div>
         </div>
       </div>
@@ -25,7 +25,7 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto text-justify">
-          {{article.description|linebreaks}}
+          {{object.description|linebreaks}}
         </div>
       </div>
     </div>

@@ -3,7 +3,7 @@ from .models import Article, Category
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('title', 'position','status')
+    list_display = ('title', 'position','parent','status')
     #by default we can't use boolean field here for that reason i have to 
     # i have to change it to list
     list_filter = (['status'])

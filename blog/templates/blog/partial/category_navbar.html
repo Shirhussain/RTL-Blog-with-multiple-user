@@ -4,9 +4,25 @@
     <a class="nav-link" href="{% url 'blog:home' %}">خانه</a>
     </li>
     {% for cat in category %}
-    <li class="nav-item">
-    <a class="nav-link" href="{% url 'blog:category' cat.slug %}">{{cat.title}}</a>
-    </li>
+        {% if cat.parent == None %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'blog:category' cat.slug %}">{{cat.title}}</a>
+                {% if cat.children.all %}
+                    {% comment %} <ul class="navbar-nav ml-auto">
+                        {% for cat in cat.children.all %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'blog:category' cat.slug %}">{{cat.title}}</a>
+                            </li>
+                        {% endfor %}
+                    </ul> {% endcomment %}
+                    {% comment %} The aboe lines are working but when you have a lot of subcategories it isn't 
+                        for that reason i will use the following tricks and creating a loop
+                    {% endcomment %}
+                    {% include "blog/partial/category_loop.html" %}
+
+                {% endif %}
+            </li>
+        {% endif %}
     {% endfor %}
 </ul>
 </div>

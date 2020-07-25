@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.text import slugify
+from django.utils.html import format_html
 
 from extensions.utils import jalali_converter
 
@@ -60,7 +61,8 @@ class Article(models.Model):
     def get_absolute_url(self):
         return reverse("blog:detail", kwargs={"slug": self.slug})
 
-    
+    objects = ArticleManager()
+
     class Meta:
         verbose_name = "مقاله"
         verbose_name_plural = "مقالات"
@@ -76,4 +78,6 @@ class Article(models.Model):
     def category_published(self):
         return self.category.filter(status=True)
         
-    objects = ArticleManager()
+    def thumbnail_tag(self):
+        return format_html(f"<img width=100 style='border-radius: 4px;' src='{self.thumbnail.url}'>")
+    thumbnail_tag.short_description = "عکس"

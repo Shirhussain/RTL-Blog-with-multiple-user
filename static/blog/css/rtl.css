@@ -1,0 +1,120 @@
+/* sahel font  from github */
+/* @font-face {
+    font-family: Sahel;
+    src: url('Sahel.eot');
+    src: url('Sahel.eot?#iefix') format('embedded-opentype'),
+        url('Sahel.woff2') format('woff2'),
+        url('Sahel.woff') format('woff'),
+        url('Sahel.ttf') format('truetype');
+} */
+
+/* 
+@font-face {
+	font-family: 'BYekan';
+	src: url('fonts/BYekan.eot?#') format('eot'),
+	url('fonts/BYekan.woff') format('woff'), 
+	url('fonts/BYekan.ttf') format('truetype');
+} */
+
+body {
+    direction: rtl;
+    text-align: right;
+    /* font-family: "Sahel" !important; */
+    /* font-family:BYekan; */
+}
+
+/* از فونت ساحل استفاده کردم از طریق سی دی ان */
+* {
+    font-family: Sahel !important;
+}
+
+/* this one is jsut for navbar to bring the left */
+ul.navbar-nav {
+    margin-left: initial !important;
+    margin-right: auto
+}
+
+p.post-meta {
+    text-align: left;
+}
+
+.paginator-button {
+    float: left !important;
+}
+
+header.masthead .post-heading h1 {
+    font-size: 1.7rem !important;
+}
+
+.post-preview>a>.post-title {
+    font-size: 1.2rem !important;
+}
+
+.h3, h3 {
+    font-size: 1.2rem !important
+}
+
+
+.nav ul {
+    padding-right: 0;
+}
+
+.nav ul li {
+    border-bottom: none;
+    height: 86px;
+    line-height: 86px;
+    font-size: 14px;
+    display: inline-block;
+    float: left;
+    margin: 0 auto;
+}
+
+.nav ul li a {
+    text-decoration: none;
+    color: #000000;
+    display: block;
+    transition: .3s background-color;
+    padding: 0 24px;
+    /* background-color: rgb(14, 0, 66); */
+}
+
+.nav ul li a:hover {
+    background-color: lightseagreen;
+    color:#ffffff;
+}
+
+.nav a {
+    border-bottom: none;
+}
+
+.nav li ul {
+    position: absolute;
+    display: none;
+    width: inherit;
+}
+
+.nav li:hover ul {
+    display: block;
+}
+
+.nav ul li ul li {
+    display: block;
+    float: none !important;
+    height: auto;
+    line-height: 34px;
+}
+
+.nav ul li ul li ul {
+    position: absolute;
+    right: 100%;
+    top: 0;
+    display: none !important;
+}
+
+.nav ul > li > ul > li:hover > ul {
+    display: block !important;
+}
+
+.nav ul > li > ul > li > ul > li:hover > ul {
+    display: block !important;
+}

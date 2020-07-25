@@ -110,6 +110,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 MEDIA_URL  = '/media/'
-MEDIA_ROOT       = os.path.join(BASE_DIR,"media_root/")
-# STATICFILES_DIRS = [os.path.join(BASE_DIR,"static")]
-# STATIC_ROOT      = os.path.join(BASE_DIR,"static_root")
+MEDIA_ROOT = os.path.join(BASE_DIR, "media_root")
+#after i run 'collectstatic' i will comment the next line
+# STATIC_ROOT      = os.path.join(BASE_DIR,"static")
+
+
+#if i wanna see the static files in my own system localy so  i can use the line bellow
+# i.e in here at Django admin i will use 
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]

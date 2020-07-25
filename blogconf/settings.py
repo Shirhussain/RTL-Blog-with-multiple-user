@@ -45,7 +45,8 @@ ROOT_URLCONF = 'blogconf.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        #this is Django admin panel template but right now i don't wanna use 
+        # 'DIRS': [os.path.join(BASE_DIR,"templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

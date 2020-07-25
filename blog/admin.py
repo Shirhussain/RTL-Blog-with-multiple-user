@@ -1,6 +1,8 @@
 from django.contrib import admin
 from .models import Article, Category
 
+#admin header change 
+admin.site.site_header = "دانشیار"
 
 def make_status_true(modeladmin, request, queryset):
     rows_updated = queryset.update(status=True)

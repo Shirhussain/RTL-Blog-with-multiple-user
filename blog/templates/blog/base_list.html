@@ -22,7 +22,7 @@
             </h3>
             </a>
             <p class="post-meta">پست شده توسط
-            <a href="#">شیرحسین</a>
+            <a href="{% url 'blog:author' article.author %}">{{article.author.get_full_name}}</a>
             {{article.jpublish}} </p>
         </div>
         {% for cat in article.category.active %}

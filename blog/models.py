@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.utils import timezone
 from django.utils.text import slugify
 from django.utils.html import format_html
+from django.contrib.auth.models import User
 
 from extensions.utils import jalali_converter
 
@@ -43,6 +44,7 @@ class Article(models.Model):
         ('p','انتشار'),
     )
 
+    author = models.ForeignKey(User,null=True, on_delete=models.SET_NULL, related_name="articles", verbose_name="نویسنده")
     title = models.CharField(max_length=200, verbose_name='عنوان')
     # اگر بخوااهیم به زبان فارسی سلگ را در یوارال استفاده کنیم ، بخاطر این کار باید از الو یونی کد استفاده کنیم
     # تنها این کار کافی نیست باید در قسمت یوآرال هم از رجیکس ها استفاده کنیم زیرا پت کارساز نیست

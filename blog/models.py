@@ -72,11 +72,7 @@ class Article(models.Model):
         return jalali_converter(self.publish)
     jpublish.short_description = "زمان انتشار"
     
-    #by default if we publish the article it has some bugs, i.e: from admin if i chose the status of article category 
-    # to false or نمایش داده نشود still in our template we can see the that it's show us the article 
-    # for that reason i will create a fuction as fallows 
-    def category_published(self):
-        return self.category.filter(status=True)
+
         
     def thumbnail_tag(self):
         return format_html(f"<img width=100 style='border-radius: 4px;' src='{self.thumbnail.url}'>")

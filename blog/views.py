@@ -18,7 +18,7 @@ from .models import Article, Category
 class ArticleView(ListView):
     # models = Article
     queryset = Article.objects.published()
-    paginate_by = 10
+    paginate_by = 7
 
 
 # def detail(request, slug):
@@ -50,7 +50,7 @@ class ArticleDetail(DetailView):
 
 class CategoryView(ListView):
     paginate_by = 7
-    template_name = "blog/category.html"
+    template_name = "blog/category_list.html"
 
     def get_queryset(self):
         global category

@@ -85,7 +85,7 @@ class ArticleAdmin(admin.ModelAdmin):
         hide the category that i chose نمایش داده نشود but sitll it show me on template and admin panel 
         the solution is line bellow with category_published method
         """
-        return ".".join([category.title for category in obj.category_published()])
+        return ".".join([category.title for category in obj.category.active()])
     category_to_str.short_description = "دسته بندی"
 
     

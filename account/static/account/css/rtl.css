@@ -1,0 +1,23 @@
+@import url('https://cdn.fontcdn.ir/Font/Persian/Sahel/Sahel.css');
+
+body {
+    text-align: right !important;
+    direction: rtl !important;
+    font-family: Sahel !important;
+}
+
+/* i will make a class and pass Sahel font to all of tags 
+why i'm doing like this --> because most of the time some templates force some tags that they have to have 
+some spesific font. so i'm forcing to mandatory give Sahel font to those tags individually
+
+the solution is to create a class by the name of 'myfont' and use this class to those tags
+.myfont {
+    font-family: Sahel;
+}
+
+also there is another way like the following i can use *
+*/
+
+* {
+    font-family: Sahel !important;
+}

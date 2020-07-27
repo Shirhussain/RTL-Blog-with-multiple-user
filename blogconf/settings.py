@@ -26,9 +26,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    #my app
     'blog.apps.BlogConfig',
     'account.apps.AccountConfig',
     'extensions',
+
+    #third party
+    #Tweak the form field rendering in templates, not in python-level form definitions.
+    # Altering CSS classes and HTML attributes is supported.
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [

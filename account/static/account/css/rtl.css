@@ -21,3 +21,12 @@ also there is another way like the following i can use *
 * {
     font-family: Sahel !important;
 }
+
+
+
+.errors {
+    color: red;
+    background: #ffdbdb;
+    padding: 4px 10px;
+    border-radius: 4px;
+}

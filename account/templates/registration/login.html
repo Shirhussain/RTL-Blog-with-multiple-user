@@ -1,4 +1,6 @@
 {% load static %}
+{% load widget_tweaks %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,6 +36,14 @@
 	<div class="limiter">
 		<div class="container-login100" style="background-image: url({% static 'account/images/bg-01.jpg' %});">
 			<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
+				{% comment %} error field for the time when user couldn't login {% endcomment %}
+				{% if form.non_field_errors %}
+					<div class="errors">
+						{% for error  in form.non_field_errors %}
+							<span>{{error}}</span>
+						{% endfor %}
+					</div>
+				{% endif %}
 				<form class="login100-form validate-form" method="POST"> 
                     {% csrf_token %}
 					<span class="login100-form-title p-b-49">
@@ -42,14 +52,30 @@
 
 					<div class="wrap-input100 validate-input m-b-23" data-validate = "Username is reauired">
 						<span class="label-input100">نام کاربری</span>
-						{{form.username}}
+						{% comment %} for adding a class for html field i will use widget_tweaks {% endcomment %}
+						{{form.username|add_class:"input100"}}
+						{% comment %} you can see this error when you disabled javascript form your browser {% endcomment %}
+						{% if form.username.errors %}
+							<div class="errors">
+								{% for error  in form.username.errors %}
+									<span>{{error}}</span>
+								{% endfor %}
+							</div>
+						{% endif %}
 						<span class="focus-input100" data-symbol="&#xf206;"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate="Password is required">
 						<span class="label-input100">پاسورد</span>
 						{% comment %} <input class="input100" type="password" name="pass" placeholder="پاسورد تان را وارید کنید"> {% endcomment %}
-                        {{form.password}}
+                        {{form.password|add_class:"input100"}}
+						{% if form.password.errors %}
+							<div class="errors">
+								{% for error  in form.password.errors %}
+									<span>{{error}}</span>
+								{% endfor %}
+							</div>
+						{% endif %}
                         <span class="focus-input100" data-symbol="&#xf190;"></span>
 					</div>
 					

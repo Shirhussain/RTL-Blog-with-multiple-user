@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'blog.apps.BlogConfig',
+    'account.apps.AccountConfig',
     'extensions',
 ]
 
@@ -119,3 +120,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media_root")
 #if i wanna see the static files in my own system localy so  i can use the line bellow
 # i.e in here at Django admin i will use 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+
+LOGIN_REDIRECT_URL = 'account:home'
+LOGIN_URL = 'account:login'

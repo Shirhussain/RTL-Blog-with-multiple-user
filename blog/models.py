@@ -79,3 +79,20 @@ class Article(models.Model):
     def thumbnail_tag(self):
         return format_html(f"<img width=100 style='border-radius: 4px;' src='{self.thumbnail.url}'>")
     thumbnail_tag.short_description = "عکس"
+
+    # if i wnna use category to str in my template nad admin for both so i sould wirte down her
+    # if i wanna use jus in admin i could use in Admin with (obj) not self  like this:
+    # def cateogry_to_str(self,obj):
+    def category_to_str(self):
+        #in python we someting like the this 
+        #  num = [2,4,6,0,4,20]
+        # [i for i in num]
+
+        # return "،".join([category.title for category in obj.category.all()])
+        """
+        by defaul i tried the above line but it has some bugs like when i want to 
+        hide the category that i chose نمایش داده نشود but sitll it show me on template and admin panel 
+        the solution is line bellow with category_published method
+        """
+        return ".".join([category.title for category in self.category.active()])
+    category_to_str.short_description = "دسته بندی"

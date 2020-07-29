@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     #Tweak the form field rendering in templates, not in python-level form definitions.
     # Altering CSS classes and HTML attributes is supported.
     'widget_tweaks',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -129,3 +130,5 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 
 LOGIN_REDIRECT_URL = 'account:home'
 LOGIN_URL = 'account:login'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

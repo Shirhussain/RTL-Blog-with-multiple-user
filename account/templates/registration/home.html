@@ -1,5 +1,10 @@
 {% extends 'registration/base.html' %}
-{% block title %}لیست مقالات{% endblock %}
+
+{% block title %}
+{% block title_meta %}
+لیست مقالات
+{% endblock title_meta %}
+{% endblock title %}
 
 {% block main %}
 
@@ -27,7 +32,7 @@
                         <td><img src="{{article.thumbnail.url}}" width="120" style = "border-radius:3px;"></td>
                         <td>{{article.category_to_str}}</td>
                         <td>{{article.author.get_full_name}}</td>
-                        <td class="text-justify">{{article.description|truncatewords:"30"}}</td>
+                        <td>{{article.description|striptags|truncatewords:"30"}}</td>
                         <td>{{article.jpublish}}</td>
                         <td>
                             {% if article.status == "p" %}

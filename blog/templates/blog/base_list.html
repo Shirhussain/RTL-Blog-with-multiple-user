@@ -18,7 +18,8 @@
                 {{article.title}}
             </h2>
             <h3 class="post-subtitle">
-                {{article.description|truncatewords:30}}
+                {% comment %} i don't wanna show cripsyform tags that's why i use 'striptags' {% endcomment %}
+                {{article.description|striptags|truncatewords:30}}
             </h3>
             </a>
             <p class="post-meta">پست شده توسط

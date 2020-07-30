@@ -73,7 +73,7 @@ WSGI_APPLICATION = 'blogconf.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'blogdb',
+        'NAME': 'rtlblog',
         'USER': 'hu3in',
         'PASSWORD': 'king',
         'HOST': '127.0.0.1',
@@ -132,3 +132,6 @@ LOGIN_REDIRECT_URL = 'account:home'
 LOGIN_URL = 'account:login'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# customer user in accont
+AUTH_USER_MODEL = "account.User"

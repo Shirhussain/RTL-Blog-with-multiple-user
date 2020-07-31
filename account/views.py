@@ -5,6 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, CreateView
 
 from blog.models import Article
+from .mixins import FieldsMixin, FormValidMxin
 
 @login_required
 def home(request):
@@ -20,10 +21,14 @@ class ArticleView(LoginRequiredMixin, ListView):
             return Article.objects.filter(author=self.request.user)
             
     
-class ArticleCreate(LoginRequiredMixin ,CreateView):
+class ArticleCreate(LoginRequiredMixin, FieldsMixin,FormValidMxin, CreateView):
     model = Article
     template_name = "registration/article_create_update.html"
-    fields = ["author", "title","slug", "category", "description", "thumbnail", "publish", "status"]
+    # the following line (fields) is working but if you wanna have diffrent user wiht different access 
+    # so i have to use Mixin and create a file by the name of mixins.py for that in account 
+    # and bring The 'FieldsMixin' instead here
+    # fields = ["author", "title","slug", "category", "description", "thumbnail", "publish", "status"]
+    
     def get_success_url(self):
         return reverse("account:home")
         

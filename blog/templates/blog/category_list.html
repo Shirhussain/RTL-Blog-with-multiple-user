@@ -1,4 +1,9 @@
 {% extends 'blog/base_list.html' %}
+
+{% block title %}
+    {{category.title}}
+{% endblock title %}
+
 {% block category_title %}
     <div class="alert alert-primary text-center mt-5" role="alert">
         دسته بندی: {{category.title}}

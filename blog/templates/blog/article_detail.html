@@ -12,7 +12,7 @@
             <h1>{{object.title}}</h1>
             {% comment %} <h2 class="subheading">Problems look mighty small from 150 miles up</h2> {% endcomment %}
             <span class="meta">منتشر شده توسط
-              <a href="#">شیرحسین</a>
+              <a href="{% url 'blog:author' object.author.username %}">{{object.author.get_full_name}}</a>
               {{object.publish|timesince}} قبل </span>
           </div>
         </div>
@@ -27,6 +27,9 @@
         <div class="col-lg-8 col-md-10 mx-auto text-justify">
           {% comment %} instead of linebreaks i wanna use 'safe' because of crispy form {% endcomment %}
           {{object.description|safe}}
+        {% for cat in article.category.active %}
+            <a href="{% url 'blog:category' cat.slug %}">#{{cat.title}}</a>
+        {% endfor %}
         </div>
       </div>
     </div>

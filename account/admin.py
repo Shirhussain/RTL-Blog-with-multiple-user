@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from.models import User
+from .models import User
 
 """ 
 if you wanna see how i'm defining my own fields to dajngo admin you casa see 

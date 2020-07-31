@@ -18,10 +18,10 @@
         {% csrf_token %}
         <div class="form-row">
             <div class="form-group col-md-6 mb-0">
-                {{ form.author|as_crispy_field }}
+                {{ form.title|as_crispy_field }}
             </div>
             <div class="form-group col-md-6 mb-0">
-                {{ form.title|as_crispy_field }}
+                {{ form.slug|as_crispy_field }}
             </div>
             <div class="form-group col-md-12 mb-0">
                 {{ form.description|as_crispy_field }}
@@ -30,15 +30,17 @@
                 {{ form.category|as_crispy_field }}
             </div>
             <div class="form-group col-md-6 mb-0">
-                {{ form.slug|as_crispy_field }}
                 {{ form.thumbnail|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-6 mb-0">
                 {{ form.publish|as_crispy_field }}
             </div>
-            <div class="form-group col-md-6 mb-0">
-                {{ form.status|as_crispy_field }}
-            </div>
+            {% if user.is_superuser %}
+                <div class="form-group col-md-6 mb-0">
+                    {{ form.author|as_crispy_field }}
+                </div>
+                <div class="form-group col-md-6 mb-0">
+                    {{ form.status|as_crispy_field }}
+                </div>
+            {% endif %}
         </div>
         <button type="submit" class="btn btn-success">ارسال مقاله </button>
         </form>

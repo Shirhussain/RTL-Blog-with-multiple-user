@@ -39,3 +39,13 @@ class AuthorAccessMixin():
             return super().dispatch(request,*args, **kwargs)
         else:
             raise  Http404("شما اجازه دسترسی به این آدرس را ندارید")
+
+
+# To make sure that only superuser hass access to delete so i do it like this 
+class SuperUserAccessMixin():
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_superuser:
+            return super().dispatch(request, *args, **kwargs)
+        else:
+            raise Http404("شما اجازه دسترسی به این آدرس را ندارید")
+        

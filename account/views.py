@@ -1,11 +1,11 @@
 from django.shortcuts import render
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView, CreateView, UpdateView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
 from blog.models import Article
-from .mixins import FieldsMixin, FormValidMxin, AuthorAccessMixin
+from .mixins import FieldsMixin, FormValidMxin, AuthorAccessMixin, SuperUserAccessMixin
 
 @login_required
 def home(request):
@@ -41,4 +41,7 @@ class ArticleUpdate(AuthorAccessMixin, FieldsMixin, FormValidMxin, UpdateView):
         return reverse("account:home")
         
 
-    
+class ArticleDelete(SuperUserAccessMixin,DeleteView):
+    model = Article
+    success_url = reverse_lazy("account:home")
+    template_name = "registration/article_confirm_delete.html"

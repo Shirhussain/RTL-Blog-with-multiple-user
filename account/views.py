@@ -2,10 +2,10 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, UpdateView
 
 from blog.models import Article
-from .mixins import FieldsMixin, FormValidMxin
+from .mixins import FieldsMixin, FormValidMxin, AuthorAccessMixin
 
 @login_required
 def home(request):
@@ -29,6 +29,14 @@ class ArticleCreate(LoginRequiredMixin, FieldsMixin,FormValidMxin, CreateView):
     # and bring The 'FieldsMixin' instead here
     # fields = ["author", "title","slug", "category", "description", "thumbnail", "publish", "status"]
     
+    def get_success_url(self):
+        return reverse("account:home")
+
+#her i don't need LoginRequiredMixin anymore because i define Atuhor Access mixin so here we go
+class ArticleUpdate(AuthorAccessMixin, FieldsMixin, FormValidMxin, UpdateView):
+    model = Article
+    template_name = "registration/article_create_update.html"
+
     def get_success_url(self):
         return reverse("account:home")
         

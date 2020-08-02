@@ -1,8 +1,9 @@
 from django.views.generic import ListView, DetailView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, get_object_or_404
-from account.models import User
 
+from account.models import User
+from account.mixins import AuthorAccessMixin
 from .models import Article, Category
 
 #for pageination i will put page=1 by default
@@ -36,6 +37,12 @@ class ArticleDetail(DetailView):
     def get_object(self):
         slug = self.kwargs.get('slug')
         return get_object_or_404(Article.objects.published(), slug=slug)
+
+
+class ArticlePreview(AuthorAccessMixin,DetailView):
+    def get_object(self):
+        pk = self.kwargs.get('pk')
+        return get_object_or_404(Article, pk=pk)
 
 
 # def category(request, slug, page=1):

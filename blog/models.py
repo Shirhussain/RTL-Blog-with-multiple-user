@@ -63,6 +63,11 @@ class Article(models.Model):
     def get_absolute_url(self):
         return reverse("blog:detail", kwargs={"slug": self.slug})
 
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            self.slug = slugify(self.title)
+        return super(Article, self).save(*args, **kwargs)
+
     objects = ArticleManager()
 
     class Meta:
@@ -96,3 +101,4 @@ class Article(models.Model):
         """
         return ".".join([category.title for category in self.category.active()])
     category_to_str.short_description = "دسته بندی"
+

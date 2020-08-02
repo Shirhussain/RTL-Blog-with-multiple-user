@@ -17,4 +17,18 @@ def category_navbar():
     return {
         'category': Category.objects.filter(status=True)
     }
+
+# we have two way to define the the 'active url' that we visite --> e.g
+# {% if request.resolver_match.url_name == 'home' %}active{% endif %}
+# more info try: {{request}} and {{request.resolver_match}}
+
+# the second way is better to  define inclusion tag as follows
+@register.inclusion_tag("registration/partials/link.html")
+def link(request, link_name, content):
+    return {
+        "request": request,
+        "link_name": link_name,
+        "link": f"account:{link_name}",
+        "content": content
+    }
     

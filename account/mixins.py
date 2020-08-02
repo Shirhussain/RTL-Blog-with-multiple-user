@@ -35,7 +35,8 @@ class AuthorAccessMixin():
         # first of all i have to get the Article then chack the author of Article 
         article = get_object_or_404(Article, pk=pk)
         # here i wanna restrict that author can edite only draft articles except superuser
-        if article.author == request.user and article.status=="d" or request.user.is_superuser:
+        # instead of status =="d and b " we need to create a list like following
+        if article.author == request.user and article.status in ['b','d'] or request.user.is_superuser:
             return super().dispatch(request,*args, **kwargs)
         else:
             raise  Http404("شما اجازه دسترسی به این آدرس را ندارید")

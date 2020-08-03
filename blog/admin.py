@@ -67,7 +67,7 @@ class CategoryAdmin(admin.ModelAdmin):
 class ArticleAdmin(admin.ModelAdmin):
     #here i cant't use ManyToManyField like category, i have to change it to sring first 
     #for this reason i will define a function as follows
-    list_display = ('title','thumbnail_tag', "jpublish", "status","author",'category_to_str')
+    list_display = ('title','thumbnail_tag', "jpublish","author",'category_to_str',"is_special", "status")
     list_filter = ('publish','author', 'status')
     search_fields = ('title','description')
     prepopulated_fields = {'slug': ('title',)}

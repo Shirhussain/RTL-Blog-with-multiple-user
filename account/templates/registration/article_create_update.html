@@ -36,6 +36,7 @@
             {% if user.is_superuser %}
                 <div class="form-group col-md-6 mb-0">
                     {{ form.author|as_crispy_field }}
+                    {{ form.is_special|as_crispy_field }}
                 </div>
                 <div class="form-group col-md-6 mb-0">
                     {{ form.status|as_crispy_field }}

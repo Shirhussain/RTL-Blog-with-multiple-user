@@ -1,4 +1,7 @@
 <a href="{% url link %}" class="nav-link {% if request.resolver_match.url_name == link_name %}active{% endif %}">
-    <i class="fa fa-list nav-icon"></i>
+    {% comment %} also please make sure that you use font-awsome in all of your project
+        otherwise it's better to use the first way and don't use inclusion tags
+    {% endcomment %}
+    <i class="fa {{classes}} nav-icon"></i>
     <p>{{content}}</p>
 </a>

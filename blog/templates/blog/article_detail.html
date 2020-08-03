@@ -26,10 +26,21 @@
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto text-justify">
           {% comment %} instead of linebreaks i wanna use 'safe' because of crispy form {% endcomment %}
-          {{object.description|safe}}
-        {% for cat in article.category.active %}
-            <a href="{% url 'blog:category' cat.slug %}">#{{cat.title}}</a>
-        {% endfor %}
+          {% if object.is_special %}
+            {% if user.is_authenticated and user.is_special_user or user == object.author or user.is_superuser %}
+              {{object.description|safe}}
+              {% for cat in article.category.active %}
+                  <a href="{% url 'blog:category' cat.slug %}">#{{cat.title}}</a>
+              {% endfor %}
+            {% else %}
+              <P>این مقاله ویژه است برای مشاهده آن باید  <a href="">اشتراک ویژه</a> تهیه کنید</P>
+            {% endif %}
+          {% else %}
+            {{object.description|safe}}
+            {% for cat in article.category.active %}
+                <a href="{% url 'blog:category' cat.slug %}">#{{cat.title}}</a>
+            {% endfor %}
+          {% endif %}
         </div>
       </div>
     </div>

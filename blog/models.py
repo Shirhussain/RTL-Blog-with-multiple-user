@@ -57,7 +57,8 @@ class Article(models.Model):
     publish = models.DateTimeField(default=timezone.now, verbose_name='زمان انتشار')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    status  = models.CharField(max_length=1, choices=STATUS_CHOIICES,verbose_name='وضعیت')
+    status = models.CharField(max_length=1, choices=STATUS_CHOIICES, verbose_name='وضعیت')
+    is_special = models.BooleanField(default=False, verbose_name="مقاله ویژه")
     
     def __str__(self):
         return self.title
@@ -65,10 +66,6 @@ class Article(models.Model):
     def get_absolute_url(self):
         return reverse("blog:detail", kwargs={"slug": self.slug})
 
-    def save(self, *args, **kwargs):
-        if not self.pk:
-            self.slug = slugify(self.title)
-        return super(Article, self).save(*args, **kwargs)
 
     objects = ArticleManager()
 

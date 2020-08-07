@@ -59,3 +59,11 @@ class Profile(UpdateView):
     # here i wanna detemine that author can only edite their own profile 
     def get_object(self):
         return User.objects.get(pk=self.request.user.pk)
+
+    #by default when we disabled some fileds for profile form in form it effect on superuser as well 
+    # her i wanna exclude The Superuser, so i have to connect throw 'kwargs'
+    def get_form_kwargs(self):
+        kwargs = super(Profile, self).get_form_kwargs()
+        kwargs.update({'user': self.request.user})
+        return kwargs
+        

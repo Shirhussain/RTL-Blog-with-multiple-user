@@ -5,13 +5,16 @@ class UserForm(forms.ModelForm):
     # here i wanna overwrite the __init__ method to prevent the use from editing the whole fields
     # author just can edite their name and last name, other thing should be disabled
     def __init__(self, *args, **kwargs):
+        # i have to take the use and then remove it 'pop' afther that because of superuser
+        user = kwargs.pop('user')
         super(UserForm, self).__init__(*args, **kwargs)
         
-        self.fields['username'].help_text = None
-        self.fields['username'].disabled = True
-        self.fields['email'].disabled = True
-        self.fields['special_user'].disabled = True
-        self.fields['is_author'].disabled = True
+        if not user.is_superuser:
+            self.fields['username'].help_text = None
+            self.fields['username'].disabled = True
+            self.fields['email'].disabled = True
+            self.fields['special_user'].disabled = True
+            self.fields['is_author'].disabled = True
 
     class Meta:
         model = User

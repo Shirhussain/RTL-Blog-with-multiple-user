@@ -6,7 +6,9 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
 from blog.models import Article
 from . models import User
+from . forms import UserForm
 from .mixins import FieldsMixin, FormValidMxin, AuthorAccessMixin, SuperUserAccessMixin
+
 
 @login_required
 def home(request):
@@ -50,8 +52,8 @@ class ArticleDelete(SuperUserAccessMixin,DeleteView):
 
 class Profile(UpdateView):
     model = User
+    form_class = UserForm
     template_name = "registration/profile.html"
-    fields = ['username', 'email', 'first_name', 'last_name', 'special_user', 'is_author']
     success_url = reverse_lazy("account:profile")
 
     # here i wanna detemine that author can only edite their own profile 

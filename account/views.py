@@ -3,6 +3,7 @@ from django.urls import reverse, reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.contrib.auth.views import LoginView
 
 from blog.models import Article
 from . models import User
@@ -50,7 +51,7 @@ class ArticleDelete(SuperUserAccessMixin,DeleteView):
     template_name = "registration/article_confirm_delete.html"
 
 
-class Profile(UpdateView):
+class Profile(LoginRequiredMixin, UpdateView):
     model = User
     form_class = UserForm
     template_name = "registration/profile.html"
@@ -66,4 +67,14 @@ class Profile(UpdateView):
         kwargs = super(Profile, self).get_form_kwargs()
         kwargs.update({'user': self.request.user})
         return kwargs
-        
+
+#here i determine that diffrent type of user should have diffrent login url 
+#e.g: superuser and author should redirect to account home and other user to profile
+class Login(LoginView):
+    def get_success_url(self):
+        user = self.request.user
+
+        if user.is_superuser or user.is_author:
+            return reverse_lazy("account:home")
+        else:
+            return reverse_lazy("account:profile")

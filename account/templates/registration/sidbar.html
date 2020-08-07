@@ -15,36 +15,38 @@
 
     <!-- Sidebar Menu -->
     <nav class="mt-2">
-    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-        <!-- Add icons to the links using the .nav-icon class
-            with font-awesome or any other icon font library -->
-        <li class="nav-item has-treeview menu-open">
-        <a href="#" class="nav-link active">
-            <i class="nav-icon fas fa-tachometer-alt"></i>
-            <p>
-            مقالات
-            <i class="right fas fa-angle-left"></i>
-            </p>
-        </a>
-        <ul class="nav nav-treeview">
-            <li class="nav-item">
-            {% comment %} <a href="{% url 'account:home' %}" class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}">
-                <i class="fa fa-list nav-icon"></i>
-                <p>لیست مقالات</p>
-            </a> {% endcomment %}
-            {% comment %} here i use inclusion tags {% endcomment %}
-            {% link request 'home' 'لیست مقالات' 'fa-list' %}
-            </li>
-            <li class="nav-item">
-            {% comment %} <a href="{% url 'account:article_create' %}" class="nav-link {% if request.resolver_match.url_name == 'article_create' %}active{% endif %}">
-                <i class="fa fa-edit nav-icon"></i>
-                <p>افزودن مقاله</p>
-            </a> {% endcomment %}
-            {% link request 'article_create' 'افزودن مقاله' 'fa-edit' %}
+    {% if user.is_superuser or user.is_author %}
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <!-- Add icons to the links using the .nav-icon class
+                with font-awesome or any other icon font library -->
+            <li class="nav-item has-treeview menu-open">
+            <a href="#" class="nav-link active">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>
+                مقالات
+                <i class="right fas fa-angle-left"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                {% comment %} <a href="{% url 'account:home' %}" class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}">
+                    <i class="fa fa-list nav-icon"></i>
+                    <p>لیست مقالات</p>
+                </a> {% endcomment %}
+                {% comment %} here i use inclusion tags {% endcomment %}
+                {% link request 'home' 'لیست مقالات' 'fa-list' %}
+                </li>
+                <li class="nav-item">
+                {% comment %} <a href="{% url 'account:article_create' %}" class="nav-link {% if request.resolver_match.url_name == 'article_create' %}active{% endif %}">
+                    <i class="fa fa-edit nav-icon"></i>
+                    <p>افزودن مقاله</p>
+                </a> {% endcomment %}
+                {% link request 'article_create' 'افزودن مقاله' 'fa-edit' %}
+                </li>
+            </ul>
             </li>
         </ul>
-        </li>
-    </ul>
+    {% endif %}
     </nav>
     <!-- /.sidebar-menu -->
 </div>

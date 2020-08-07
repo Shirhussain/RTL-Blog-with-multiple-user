@@ -8,14 +8,14 @@ from django.contrib.auth.views import LoginView
 from blog.models import Article
 from . models import User
 from . forms import UserForm
-from .mixins import FieldsMixin, FormValidMxin, AuthorAccessMixin, SuperUserAccessMixin
+from .mixins import FieldsMixin, FormValidMxin, AuthorAccessMixin,AuthorsAccessMixin, SuperUserAccessMixin
 
 
 @login_required
 def home(request):
     return render(request, "registration/home.html")
 
-class ArticleView(LoginRequiredMixin, ListView):
+class ArticleView(AuthorsAccessMixin, ListView):
     template_name = "registration/home.html"
 
     def get_queryset(self):
@@ -25,7 +25,7 @@ class ArticleView(LoginRequiredMixin, ListView):
             return Article.objects.filter(author=self.request.user)
             
     
-class ArticleCreate(LoginRequiredMixin, FieldsMixin,FormValidMxin, CreateView):
+class ArticleCreate(AuthorsAccessMixin, FieldsMixin,FormValidMxin, CreateView):
     model = Article
     template_name = "registration/article_create_update.html"
     # the following line (fields) is working but if you wanna have diffrent user wiht different access 

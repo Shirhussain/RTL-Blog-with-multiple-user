@@ -1,5 +1,5 @@
 from django.http import Http404
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from blog.models import Article
 # The same code is sused by djano it self as well in django.admin.contrib.auth.mixin
 class FieldsMixin():
@@ -42,6 +42,17 @@ class AuthorAccessMixin():
             raise  Http404("شما اجازه دسترسی به این آدرس را ندارید")
 
 
+#i wanna restrict some url like 'article_list, article_crate or update ' for nornal user 
+class AuthorsAccessMixin():
+    #author mixin take 'pk' and apply onley for one author but here is for diffrent type of author
+        def dispatch(self, request, *args, **kwargs):
+            if request.user.is_authenticated:
+                if request.user.is_superuser or request.user.is_author:
+                    return super().dispatch(request, *args, **kwargs)
+                else:
+                    return redirect("account:profile")
+            else:
+                return redirect("account:login")
 # To make sure that only superuser hass access to delete so i do it like this 
 class SuperUserAccessMixin():
     def dispatch(self, request, *args, **kwargs):

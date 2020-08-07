@@ -16,6 +16,9 @@
             <a href="{{article.get_absolute_url}}">
             <h2 class="post-title">
                 {{article.title}}
+                {% if article.is_special %}
+                    <span class="badge badge-danger" style="font-size:12px;">ویژه</span>
+                {% endif %}
             </h2>
             <h3 class="post-subtitle">
                 {% comment %} i don't wanna show cripsyform tags that's why i use 'striptags' {% endcomment %}

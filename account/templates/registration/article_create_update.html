@@ -31,8 +31,11 @@
             </div>
             <div class="form-group col-md-6 mb-0">
                 {{ form.thumbnail|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-6 mb-0">
                 {{ form.publish|as_crispy_field }}
             </div>
+
             {% if user.is_superuser %}
                 <div class="form-group col-md-6 mb-0">
                     {{ form.author|as_crispy_field }}
@@ -40,6 +43,20 @@
                 <div class="form-group col-md-6 mb-0">
                     {{ form.status|as_crispy_field }}
                 </div>
+            {% else %}
+            <div class="form-group col-md-6 mb-0">
+                <div id="div_id_status" class="form-group">
+                    <label for="id_status" class=" requiredField">
+                    وضعیت<span class="asteriskField">*</span>
+                    </label>
+                    <div class="">
+                        <select name="status" class="select form-control" required="" id="id_status">
+                            <option value="d">پیش نویس</option>
+                            <option value="i">ارسال به ادمین</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
             {% endif %}
             <div class="form-group col-md-6 mb-0">
                 {{ form.is_special|as_crispy_field }}

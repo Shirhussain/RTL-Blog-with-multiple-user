@@ -11,6 +11,9 @@
           <div class="post-heading">
             <h1>{{object.title}}</h1>
             {% comment %} <h2 class="subheading">Problems look mighty small from 150 miles up</h2> {% endcomment %}
+            {% if article.is_special %}
+              <span class="badge badge-danger" style="font-size:12px;">ویژه</span>
+            {% endif %}
             <span class="meta">منتشر شده توسط
               <a href="{% url 'blog:author' object.author.username %}">{{object.author.get_full_name}}</a>
               {{object.publish|timesince}} قبل </span>
@@ -33,7 +36,8 @@
                   <a href="{% url 'blog:category' cat.slug %}">#{{cat.title}}</a>
               {% endfor %}
             {% else %}
-              <P>این مقاله ویژه است برای مشاهده آن باید  <a href="">اشتراک ویژه</a> تهیه کنید</P>
+              {{article.description|striptags|truncatewords:30}}
+              <P class="alert alert-warning" >این مقاله ویژه است برای مشاهده آن باید  <a href="#" class="alert-link">اشتراک ویژه</a> تهیه کنید</P>
             {% endif %}
           {% else %}
             {{object.description|safe}}

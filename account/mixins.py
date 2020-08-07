@@ -4,12 +4,18 @@ from blog.models import Article
 # The same code is sused by djano it self as well in django.admin.contrib.auth.mixin
 class FieldsMixin():
     def dispatch(self, request, *args, **kwargs):
+        # if request.user.is_superuser:
+        #     self.fields = ["author", "title","slug", "category", "description", "thumbnail", "publish","is_special","status"]
+        # elif request.user.is_author:
+        #     self.fields = ["title", "slug", "category", "description", "thumbnail","is_special", "publish"]
+        # else:
+        #     raise Http404("به شما اجازه دسترسی به این آدرس نیست")
+        
+        # after i decide that author also has access to send for investigation the article so i removed the above code
+        # and use below code
+        self.fields = ["title", "slug", "category", "description", "thumbnail", "publish", "is_special", "status"]
         if request.user.is_superuser:
-            self.fields = ["author", "title","slug", "category", "description", "thumbnail", "publish","is_special","status"]
-        elif request.user.is_author:
-            self.fields = ["title", "slug", "category", "description", "thumbnail","is_special", "publish"]
-        else:
-            raise Http404("به شما اجازه دسترسی به این آدرس نیست")
+            self.fields.append('author')
         return super().dispatch(request, *args, **kwargs)
 
 
@@ -24,7 +30,12 @@ class FormValidMxin():
         else:
             self.obj = form.save(commit=False)
             self.obj.author = self.request.user
-            self.obj.status = "d"
+            # self.obj.status = "d"
+            
+            # the next code is the restrict the author for publishing the article 
+            # also i could use like this code as well ---> if not self.obj.status in ['i','d']: 
+            if not self.obj.status == "i":
+                self.obj.status = "d"
         return super().form_valid(form)
 
 

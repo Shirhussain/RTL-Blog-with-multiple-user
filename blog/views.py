@@ -1,6 +1,7 @@
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, UpdateView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, get_object_or_404
+from django.urls import reverse_lazy
 
 from account.models import User
 from account.mixins import AuthorAccessMixin
@@ -88,3 +89,4 @@ class AuthorView(ListView):
         context = super().get_context_data(**kwargs)
         context['author'] = author
         return context
+

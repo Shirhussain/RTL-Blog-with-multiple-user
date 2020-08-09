@@ -3,7 +3,7 @@ from django.urls import reverse, reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, PasswordChangeView
 
 from blog.models import Article
 from . models import User
@@ -78,3 +78,9 @@ class Login(LoginView):
             return reverse_lazy("account:home")
         else:
             return reverse_lazy("account:profile")
+
+
+# i need success url but for default 'PsswordChangeView' i can't add myapp 'account:profile' in django soruce
+# so i have to overwrite the passwordChangeView as fallows
+class PasswordChange(PasswordChangeView):
+    success_url = reverse_lazy("account:password_change_done")

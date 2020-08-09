@@ -23,6 +23,10 @@
             <div class="form-group col-md-6 mb-0">
                 {{ form.email|as_crispy_field }}
             </div>
+            <div class="col-12">
+                <label class="my-4">رمز عبور: </label>
+                <span>برای تغیر رمز عبور <a href="{% url 'account:password_change' %}">کلیک</a> کنید</sapn>    
+            </div>
             <div class="form-group col-md-6 mb-0">
                 {{ form.first_name|as_crispy_field }}
             </div>

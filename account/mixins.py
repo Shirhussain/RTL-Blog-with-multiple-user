@@ -63,7 +63,7 @@ class AuthorsAccessMixin():
                 else:
                     return redirect("account:profile")
             else:
-                return redirect("account:login")
+                return redirect("login")
 # To make sure that only superuser hass access to delete so i do it like this 
 class SuperUserAccessMixin():
     def dispatch(self, request, *args, **kwargs):

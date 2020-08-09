@@ -130,11 +130,14 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media_root")
 # i.e in here at Django admin i will use 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 
-LOGIN_REDIRECT_URL = 'account:home'
-LOGOUT_REDIRECT_URL = 'account:login'
-LOGIN_URL = 'account:login'
+LOGIN_REDIRECT_URL = 'account:home'  
+# LOGOUT_REDIRECT_URL = 'account:login'  ---> this is i used when i used login url in acount
+LOGOUT_REDIRECT_URL = 'login'
+LOGIN_URL = 'login'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # customer user in accont
 AUTH_USER_MODEL = "account.User"
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

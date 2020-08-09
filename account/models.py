@@ -12,6 +12,8 @@ class User(AbstractUser):
     here we don't need to rewrite every filed just add wat you want to 
     append to the previous use fields 
     """
+    # here i need to an email for every user and it should be unique 
+    email = models.EmailField(unique=True, verbose_name="ایمل")
     is_author = models.BooleanField(default=False, verbose_name="وضعیت نویسندگی")
     special_user = models.DateTimeField(default=timezone.now, verbose_name="کاربر ویژه")
 

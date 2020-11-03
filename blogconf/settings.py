@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     # you can define an image field and that's it. but if you wanna do it like me 
     #here is the deal--> your user mast have registed to https://en.gravatar.com/ which wordpres user used a lot.
     'django_gravatar',
+    'comment',
 
     
     'django.contrib.admin',

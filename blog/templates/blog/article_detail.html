@@ -1,5 +1,7 @@
 {% extends 'blog/base.html' %}
-  {% block title %} {{object.title}}
+{% load comment_tags %}
+
+{% block title %} {{object.title}}
   {% endblock title %}
 {% block content %}
   <!-- Page Header -->
@@ -45,6 +47,12 @@
                 <a href="{% url 'blog:category' cat.slug %}">#{{cat.title}}</a>
             {% endfor %}
           {% endif %}
+          
+          
+          <!-- commenting system -->
+          {% render_comments object request %} 
+          {% include_bootstrap %}
+          {% include_static %}
         </div>
       </div>
     </div>

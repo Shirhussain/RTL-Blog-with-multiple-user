@@ -1,0 +1,25 @@
+{% load comment_tags %}
+<form class="js-comment-delete-form m-0" method="post" data-url="{% if comment %}{% url 'comment:delete' pk=comment.id %}{% endif %}">
+    {% csrf_token %}
+    <div class="modal-header">
+        <h5 class="modal-title">{% block title %}تاید حذف دیدگاه{% endblock title %}</h5>
+        <button class="modal-close-btn" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p class="lead">{% block content %} آیا از حذف دیگاه {% endblock content %}<strong>"{{ comment.content|slice:":25" }}" {{comment.user.get_full_name}} </strong>اطمنان دارید؟</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="modal-cancel-btn {% block close_btn_cls %}btn btn-secondary{% endblock close_btn_cls %}" data-dismiss="modal">انصراف</button>
+
+        <input name="model_name" value="{{model_name}}" hidden>
+        <input name="model_id" value="{{model_id}}" hidden>
+        <input name="app_name" value="{{app_name}}" hidden>
+        <input name="isParent" value="{{comment.is_parent}}" hidden>
+        <input name="oauth" value="{{oauth}}" hidden>
+        <button id="modal-btn" type="submit" class="{% block del_btn_cls %}btn btn-danger{% endblock del_btn_cls %}">
+            حذف
+        </button>
+    </div>
+</form>

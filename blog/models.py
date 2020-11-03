@@ -7,6 +7,10 @@ from account.models import User
 
 from extensions.utils import jalali_converter
 
+#third pary
+from django.contrib.contenttypes.fields import GenericRelation
+from comment.models import Comment
+
 
 #by default if i wanna change the status of an article to draft but in still i can see 
 #that it's show us on the tempalte also i can't use "filter()" in template 
@@ -59,6 +63,7 @@ class Article(models.Model):
     updated = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=1, choices=STATUS_CHOIICES, verbose_name='وضعیت')
     is_special = models.BooleanField(default=False, verbose_name="مقاله ویژه")
+    comments = GenericRelation(Comment)
     
     def __str__(self):
         return self.title

@@ -1,12 +1,14 @@
 {% load static %}
 {% load base_tags %}
+{% load gravatar %}
+
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
 <!-- Sidebar -->
 <div class="sidebar">
     <!-- Sidebar user panel (optional) -->
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
     <div class="image">
-        <img src="{% static 'account/adminlte/assets/img/user2-160x160.jpg' %}" class="img-circle elevation-2" alt="User Image">
+        <img src="{% gravatar_url user.email 150 %}" class="img-circle elevation-2" alt="{{user.email}}">
     </div>
     <div class="info">
         <a href="{% url 'account:profile' %}" class="d-block">

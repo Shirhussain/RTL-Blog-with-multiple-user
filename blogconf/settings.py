@@ -30,6 +30,10 @@ INSTALLED_APPS = [
     # Altering CSS classes and HTML attributes is supported.
     'widget_tweaks',
     'crispy_forms',
+    # for profile picture i use this gravatar. if you wanna do it you self also 
+    # you can define an image field and that's it. but if you wanna do it like me 
+    #here is the deal--> your user mast have registed to https://en.gravatar.com/ which wordpres user used a lot.
+    'django_gravatar',
 
     
     'django.contrib.admin',
@@ -77,9 +81,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'rtlblog',
-        'USER': 'hu3in',
+        'USER': 'postgres',
         'PASSWORD': 'king',
-        'HOST': '127.0.0.1',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }
@@ -151,3 +155,4 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = config('EMAIL_PORT')
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+

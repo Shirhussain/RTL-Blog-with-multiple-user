@@ -146,7 +146,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # customer user in accont
 AUTH_USER_MODEL = "account.User"
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # for secureing your account and don't sharing our gmail infor or any other sensitive info 
 # i gonna use python-decouple ---> pip install python-decouple

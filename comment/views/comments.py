@@ -6,6 +6,11 @@ from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
 from django.views import View
 from django.contrib import messages
+from django.core.mail import EmailMessage
+from django.contrib.sites.shortcuts import get_current_site
+from django.urls import  reverse
+
+
 
 from comment.models import Comment
 from comment.forms import CommentForm
@@ -74,6 +79,57 @@ class CreateComment(CanCreateMixin, BaseCommentView):
         else:
             _comment.save()
             self.comment = _comment
+
+
+        # send email section
+        # اگر میخواهید بعد از اینکه کامنت گذاشته شد ایمل هم ارسال شود به کسی که کامنت گذاشته است، به صاحب سایت و 
+        # به کسی که پاسخ یا ریپلای داده می شود 
+        # اگر دوست ندارید به کسی ایمل شود این قمست از کد که در پاین وشتم را میتوانید حذف کنید
+        #if yo wnna access to article trough comment so to it like this 
+        article = self.comment.content_object
+        current_site = get_current_site(self.request)
+        author_email = article.author.email 
+        user_email = self.comment.user.email
+        # بعضی وقت ها نویسنده مقاله در پست خود کامنت میگذارد به این خاطر ما نیاز به یک تست هم داریم
+        # خوب ما میدانیم در صورت این اتفاق ایمل نویسنده با ایمل کامنت کننده یکسان است 
+        if user_email == author_email:
+            user_email = False
+            author_email = False
+        parent_email = False
+        # by default parent email should be false and then we have to check it.
+        if self.comment.parent:
+            parent_email = self.comment.parent.user.email
+            # بازهم یک چک دیگر را اینجا اعمال میکنم: مثلا نویسنده به کامنت خود پاسخ می دهد یا ریپلای می کند
+            # یا کاربر به خودش ریپلای کرده 
+            if parent_email in [author_email, user_email]:
+                parent_email = False
+            
+        if author_email:
+            email = EmailMessage(
+                    "دیدگاه جدید",
+                    "دیدگاه جدید برای مقاله «{}» که شما نویسنده آن هستید ارسال شد:\n {}{}".format(article,current_site, reverse('blog:detail', kwargs={'slug': article.slug})), 
+                    to=[author_email]
+            )
+            email.send()
+
+        if user_email:
+            email = EmailMessage(
+                "دیدگاه شما دریافت شد",
+                "دیدگاه شما دریافت شد به زودی به آن جواب میدهم.",
+                to=[user_email]
+            )
+            email.send()
+
+        
+            
+        if parent_email:
+            email = EmailMessage(
+                    "پاسخ به دیدگاه شما",
+                    "پاسخی به دیدگاه شما در مقاله «{}» ثبت شد برای دیدن آن روی لینک زیر کلیک کنید:\n {}{}".format(article,current_site, reverse('blog:detail', kwargs={'slug': article.slug})), 
+                    to=[parent_email]
+            )
+            email.send()
+        # end send email section
 
         return self.render_to_response(self.get_context_data())
 

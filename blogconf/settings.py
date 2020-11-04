@@ -30,6 +30,8 @@ INSTALLED_APPS = [
     # Altering CSS classes and HTML attributes is supported.
     'widget_tweaks',
     'crispy_forms',
+    'star_ratings',
+
     # for profile picture i use this gravatar. if you wanna do it you self also 
     # you can define an image field and that's it. but if you wanna do it like me 
     #here is the deal--> your user mast have registed to https://en.gravatar.com/ which wordpres user used a lot.
@@ -156,4 +158,15 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = config('EMAIL_PORT')
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+
+
+
+# start raging third party app settings
+# for more personalization you should go to the pypi settings 
+STAR_RATINGS_STAR_HEIGHT = 16
+# STAR_RATINGS_RERATE = False
+# STAR_RATINGS_RANGE = 7
+# STAR_RATINGS_ANONYMOUS = True
+# if you wanna put your own image or graphic style should follow this line
+# STAR_RATINGS_STAR_SPRITE = os.path.join(BASE_DIR,"static/image/star.png")
 

@@ -1,5 +1,6 @@
 {% extends 'blog/base.html' %}
 {% load static %}
+{% load ratings %}
 {% block content %}
 
 <!-- Page Header -->
@@ -20,6 +21,8 @@
                     <span class="badge badge-danger" style="font-size:12px;">ویژه</span>
                 {% endif %}
             </h2>
+            <!-- third party rating app. her we don't have object instead we use article -->
+            <dive>{% ratings article %}</dive>
             <h3 class="post-subtitle">
                 {% comment %} i don't wanna show cripsyform tags that's why i use 'striptags' {% endcomment %}
                 {{article.description|striptags|truncatewords:30}}

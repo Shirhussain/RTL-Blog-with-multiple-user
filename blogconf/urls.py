@@ -11,7 +11,8 @@ urlpatterns = [
     path('login/', Login.as_view(), name='login'),
     path('register/', Register.as_view(), name='register'),
     re_path(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',activate, name='activate'),
-
+    # for new version of django we don't need to apply app name for third party here
+    re_path(r'^ratings/', include('star_ratings.urls', namespace='ratings')), 
     path('comment/', include('comment.urls')),
     path('admin/', admin.site.urls),
     path('', include('blog.urls', namespace='blog')),

@@ -27,6 +27,10 @@
 
     {% comment %} my own style for rtl {% endcomment %}
     <link href="{% static 'blog/css/rtl.css' %}" rel="stylesheet">
+
+    <!-- django-star-ratings app static files -->
+    <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+    <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
     
     {% comment %} if i want to add my own CSS style in some pages so i can use like the following {% endcomment %}
     {% block custome_css %}

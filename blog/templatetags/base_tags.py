@@ -2,6 +2,7 @@ from django import template
 from ..models import Category, Article
 from django.db.models import Count, Q
 from datetime import datetime, timedelta
+from django.contrib.contenttypes.models import ContentType
 
 
 register = template.Library()
@@ -23,14 +24,29 @@ def category_navbar():
 
 # annotate = برای برقرار کردن ارتباط بین جدول ها استفاده می شود، مثلا ممکن است تعداد کتاب را در انتشارات حساب کرد
 # aggregate = برای حساب کردن در خود یک جدول استفاده می شود 
-@register.inclusion_tag("blog/partial/popular_articles.html")
+@register.inclusion_tag("blog/partial/sidebar.html")
 def popular_articles():
     last_month = datetime.today()-timedelta(days=30)
     return {
-        'popular_articles': Article.objects.annotate(
+        'articles': Article.objects.annotate(
             # wiht lookup '__' you can access to field of another linked table
             count=Count('hits', filter=Q(articlehit__created__gt=last_month))
-            ).order_by('-count', '-publish')[:5]
+            ).order_by('-count', '-publish')[:5],
+        'title': 'مقالات پر بازدید ماه'
+    }
+
+@register.inclusion_tag("blog/partial/sidebar.html")
+def hot_articles():
+    last_month = datetime.today()-timedelta(days=30)
+    content_type_id = ContentType.objects.get(app_label='blog', model='article').id
+    return {
+        'articles': Article.objects.annotate(
+            # for comment application we have content_type_id for a references to connected model
+            # otherwise we don't know to which model our comment is connected, this proses is done through Generic relation
+            # you can statically also write just find from table like at first i have don so i.e: '3' 
+            count=Count('comments', filter=Q(comments__posted__gt=last_month) and Q(comments__content_type_id=content_type_id))
+            ).order_by('-count', '-publish')[:5],
+        'title': 'مقالات داغ ماه'
     }
 
 # we have two way to define the the 'active url' that we visite --> e.g

@@ -35,8 +35,10 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto text-justify">
-          {% popular_articles %}
-          
+          <aside>
+            {% popular_articles %}
+            {% hot_articles %}
+          </aside>
           {% comment %} instead of linebreaks i wanna use 'safe' because of crispy form {% endcomment %}
           {% if object.is_special %}
             {% if user.is_authenticated and user.is_special_user or user == object.author or user.is_superuser %}

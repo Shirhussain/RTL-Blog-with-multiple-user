@@ -3,6 +3,7 @@
 {% load ratings %}
 {% block content %}
 {% load base_tags %}
+{% load humanize %}
 
 <!-- Page Header -->
 {% block header %} {% endblock header %}
@@ -34,7 +35,7 @@
             </a>
             <p class="post-meta">پست شده توسط
             <a href="{% url 'blog:author' article.author %}">{{article.author.get_full_name}}</a>
-            {{article.jpublish}} </p>
+            {{article.publish|naturaltime}} </p>
         </div>
         <div>
             {% for cat in article.category.active %}
@@ -43,6 +44,9 @@
         </div>
         <dive>بازدید ها: {{article.hits.count}}</dive>
         <hr>
+        <!-- if the user don't find the result in target so we have to show something or query is empty    -->
+        {% empty %}
+            <p>متاسفانه محتوایی برا نمایش یافت نشد</p>
         {% endfor %}
         <!-- Pager -->
         {% if is_paginated %}

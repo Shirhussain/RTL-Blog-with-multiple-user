@@ -1,0 +1,19 @@
+{% extends 'blog/base_list.html' %}
+{% block category_title %}
+    <div class="alert alert-primary text-center mt-5" role="alert">
+        جستجو: {{search}}
+    </div>
+{% endblock %}
+
+{% block header %}
+    <header class="masthead">
+    </header> 
+{% endblock header %}
+
+{% block previous_page_url %} 
+{% url 'blog:search' page_obj.previous_page_number %}?q={{search}}
+{% endblock %}
+
+{% block next_page_url %} 
+{% url 'blog:search' page_obj.next_page_number %}?q={{search}}
+{% endblock %}

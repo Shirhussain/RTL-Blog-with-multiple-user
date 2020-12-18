@@ -2,7 +2,7 @@ from django.views.generic import ListView, DetailView, UpdateView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
-# تایم دلتا برای کم کردن زمان کاربرد دارد
+from django.db.models import Q
 
 
 from account.models import User
@@ -97,3 +97,19 @@ class AuthorView(ListView):
         context['author'] = author
         return context
 
+
+
+class SearchList(ListView):
+    paginate_by = 7
+    template_name = "blog/search_list.html"
+    
+    def get_queryset(self):
+        search = self.request.GET.get('q')
+        return Article.objects.filter(Q(description__icontains=search) | Q(title__icontains=search))
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["search"] = self.request.GET.get('q')
+        return context
+    
+    

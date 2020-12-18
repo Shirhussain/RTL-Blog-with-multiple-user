@@ -1,5 +1,5 @@
 from django.urls import path, re_path
-from .views import ArticleView, ArticleDetail, CategoryView, AuthorView, ArticlePreview
+from .views import ArticleView, ArticleDetail, CategoryView, AuthorView, ArticlePreview, SearchList
 
 app_name = "blog"
 urlpatterns = [
@@ -12,7 +12,7 @@ urlpatterns = [
     re_path(r'category/(?P<slug>[-\w]+)/page/(?P<page>[0-9])/$', CategoryView.as_view(), name="category"), 
     re_path(r'author/(?P<username>[-\w]+)/$', AuthorView.as_view(), name="author"), 
     re_path(r'author/(?P<username>[-\w]+)/page/(?P<page>[0-9])/$', AuthorView.as_view(), name="author"), 
+    re_path(r'author/$', SearchList.as_view(), name="search"), 
+    re_path(r'author/page/(?P<page>[0-9])/$', SearchList.as_view(), name="search"), 
 ]
-
-
 

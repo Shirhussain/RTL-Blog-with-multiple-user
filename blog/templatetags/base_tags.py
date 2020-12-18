@@ -1,6 +1,7 @@
 from django import template
 from ..models import Category, Article
 from django.db.models import Count, Q
+# تایم دلتا برای کم کردن زمان کاربرد دارد
 from datetime import datetime, timedelta
 from django.contrib.contenttypes.models import ContentType
 

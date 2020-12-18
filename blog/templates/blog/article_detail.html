@@ -2,6 +2,8 @@
 {% load comment_tags %}
 {% load ratings %}
 {% load base_tags %}
+{% load humanize %}
+
 
 {% block title %} {{object.title}}
   {% endblock title %}
@@ -20,7 +22,7 @@
             {% endif %}
             <span class="meta">منتشر شده توسط
               <a href="{% url 'blog:author' object.author.username %}">{{object.author.get_full_name}}</a>
-              {{object.publish|timesince}} قبل </span> <br> 
+              {{object.publish|naturaltime}} </span> <br> 
               <!-- this is from rating third party app -->
               <dive>{% ratings object %}</dive> <br>
               <dive>بازدید ها: {{object.hits.count}}</dive>

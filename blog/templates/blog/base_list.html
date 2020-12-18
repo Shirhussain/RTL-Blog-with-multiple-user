@@ -2,15 +2,18 @@
 {% load static %}
 {% load ratings %}
 {% block content %}
+{% load base_tags %}
 
 <!-- Page Header -->
 {% block header %} {% endblock header %}
-
 <div class="container">
     <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
 
             {% block category_title %} {% endblock %}
+            
+            {% popular_articles %}
+            
         {% comment %} here i wanna use "Managers" instead of "all" --> like published  {% endcomment %}
         {% for article in object_list %}
         <div class="post-preview">
@@ -32,9 +35,12 @@
             <a href="{% url 'blog:author' article.author %}">{{article.author.get_full_name}}</a>
             {{article.jpublish}} </p>
         </div>
-        {% for cat in article.category.active %}
-            <a href="{% url 'blog:category' cat.slug %}">#{{cat.title}}</a>
-        {% endfor %}
+        <div>
+            {% for cat in article.category.active %}
+                <a href="{% url 'blog:category' cat.slug %}">#{{cat.title}}</a>
+            {% endfor %}
+        </div>
+        <dive>بازدید ها: {{article.hits.count}}</dive>
         <hr>
         {% endfor %}
         <!-- Pager -->
@@ -49,6 +55,7 @@
             </div>
         {% endif %}
         </div>
+        
     </div>
     </div>
 

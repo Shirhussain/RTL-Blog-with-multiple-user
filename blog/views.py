@@ -2,6 +2,8 @@ from django.views.generic import ListView, DetailView, UpdateView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
+# تایم دلتا برای کم کردن زمان کاربرد دارد
+
 
 from account.models import User
 from account.mixins import AuthorAccessMixin
@@ -25,6 +27,8 @@ class ArticleView(ListView):
     paginate_by = 7
 
 
+
+
 # def detail(request, slug):
 #     # article = get_object_or_404(Article, slug=slug, status='p')
 #     # instead of above line i can use "Managers here"
@@ -37,8 +41,11 @@ class ArticleView(ListView):
 class ArticleDetail(DetailView):
     def get_object(self):
         slug = self.kwargs.get('slug')
-        return get_object_or_404(Article.objects.published(), slug=slug)
-
+        article =  get_object_or_404(Article.objects.published(), slug=slug)
+        ip_address = self.request.user.ip_address 
+        if ip_address not in article.hits.all():
+            article.hits.add(ip_address)
+        return article
 
 class ArticlePreview(AuthorAccessMixin,DetailView):
     def get_object(self):

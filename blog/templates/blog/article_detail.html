@@ -1,6 +1,7 @@
 {% extends 'blog/base.html' %}
 {% load comment_tags %}
 {% load ratings %}
+{% load base_tags %}
 
 {% block title %} {{object.title}}
   {% endblock title %}
@@ -21,7 +22,8 @@
               <a href="{% url 'blog:author' object.author.username %}">{{object.author.get_full_name}}</a>
               {{object.publish|timesince}} قبل </span> <br> 
               <!-- this is from rating third party app -->
-              <dive>{% ratings object %}</dive>
+              <dive>{% ratings object %}</dive> <br>
+              <dive>بازدید ها: {{object.hits.count}}</dive>
           </div>
         </div>
       </div>
@@ -33,6 +35,8 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto text-justify">
+          {% popular_articles %}
+          
           {% comment %} instead of linebreaks i wanna use 'safe' because of crispy form {% endcomment %}
           {% if object.is_special %}
             {% if user.is_authenticated and user.is_special_user or user == object.author or user.is_superuser %}

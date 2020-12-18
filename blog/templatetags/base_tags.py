@@ -1,5 +1,8 @@
 from django import template
-from ..models import Category
+from ..models import Category, Article
+from django.db.models import Count, Q
+from datetime import datetime, timedelta
+
 
 register = template.Library()
 
@@ -16,6 +19,18 @@ def title():
 def category_navbar():
     return {
         'category': Category.objects.filter(status=True)
+    }
+
+# annotate = برای برقرار کردن ارتباط بین جدول ها استفاده می شود، مثلا ممکن است تعداد کتاب را در انتشارات حساب کرد
+# aggregate = برای حساب کردن در خود یک جدول استفاده می شود 
+@register.inclusion_tag("blog/partial/popular_articles.html")
+def popular_articles():
+    last_month = datetime.today()-timedelta(days=30)
+    return {
+        'popular_articles': Article.objects.annotate(
+            # wiht lookup '__' you can access to field of another linked table
+            count=Count('hits', filter=Q(articlehit__created__gt=last_month))
+            ).order_by('-count', '-publish')[:5]
     }
 
 # we have two way to define the the 'active url' that we visite --> e.g

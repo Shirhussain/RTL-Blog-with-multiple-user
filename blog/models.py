@@ -11,6 +11,13 @@ from extensions.utils import jalali_converter
 from django.contrib.contenttypes.fields import GenericRelation
 from comment.models import Comment
 
+class IPAddress(models.Model):
+    ip_address = models.GenericIPAddressField(verbose_name="آدرس آی پی")
+
+    class Meta:
+        verbose_name = ("آدرس آی پی")
+        verbose_name_plural = ("آدرس آی پی ها")
+
 
 #by default if i wanna change the status of an article to draft but in still i can see 
 #that it's show us on the tempalte also i can't use "filter()" in template 
@@ -64,6 +71,8 @@ class Article(models.Model):
     status = models.CharField(max_length=1, choices=STATUS_CHOIICES, verbose_name='وضعیت')
     is_special = models.BooleanField(default=False, verbose_name="مقاله ویژه")
     comments = GenericRelation(Comment)
+    # through model or middle model is going to connect us with article Hit as well
+    hits = models.ManyToManyField(IPAddress, through="ArticleHit", verbose_name=("بازدیدها"), related_name="hits", blank=True)
     
     def __str__(self):
         return self.title
@@ -106,3 +115,8 @@ class Article(models.Model):
         return ".".join([category.title for category in self.category.active()])
     category_to_str.short_description = "دسته بندی"
 
+
+class ArticleHit(models.Model):
+    article = models.ForeignKey(Article, on_delete=models.CASCADE)
+    ip_address = models.ForeignKey(IPAddress, on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)

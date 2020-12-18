@@ -118,3 +118,19 @@ header.masthead .post-heading h1 {
 .nav ul > li > ul > li > ul > li:hover > ul {
     display: block !important;
 }
+
+
+.popular_articles {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    width: 240px;
+    position: absolute;
+    left: -240px;
+    box-shadow: -5px 5px #ada1a1;
+    top: 0;
+}
+
+.popular_articles > a {
+    color: #4b8ed5 !important;
+}
